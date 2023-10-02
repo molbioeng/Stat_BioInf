@@ -54,12 +54,16 @@ ggplot(df, aes(sample)) +
 **Logarithmic scale**
 
 ```{r}
-ggplot(df, aes(sample)) +
-  geom_histogram(bins = 100, aes(y=after_stat(density))) + 
+df$logCounts <- log10(sample)
+
+```
+
+```{r}
+ggplot(df, aes(logCounts)) +
+  geom_histogram(bins = 100) + 
   ggtitle("Logarithmic scaled histogram") + 
-  xlab("Value") + ylab("Density") + 
-  annotation_logticks(sides='b') +
-  scale_x_continuous(trans='log')
+  xlab("Value") + ylab("Count") + 
+  annotation_logticks(sides='b')
 
 ```
 
